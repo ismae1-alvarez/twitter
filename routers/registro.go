@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"twitter/bd"
 	"twitter/models"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 /*Crear el regsitro de BD del usuario*/
@@ -18,6 +20,8 @@ func Registro(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Error en los datos recibidos"+err.Error(), 400)
 		return
 	}
+
+	t.ID = primitive.NewObjectID()
 
 	if len(t.Email) == 0 {
 		http.Error(w, "El email de usuaeios es requerido", 400)
